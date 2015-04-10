@@ -1,0 +1,13 @@
+{
+    "name": "vendor/bungkusnasi",
+    "description": "Aplikasi Landing Page Creator, distribusi ekslusif untuk Member K-Link",
+    "authors": [
+        {
+            "name": "sahid",
+            "email": "sahid@k-link.co.id"
+        }
+    ],
+    "require": {
+        "swiftmailer/swiftmailer": "5.3.0"               
+    }
+}
