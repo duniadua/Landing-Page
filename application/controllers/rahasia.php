@@ -55,7 +55,7 @@ class rahasia extends CI_Controller {
         $content = "Hallo perkenalkan saya " . $row->owner . "\n";
         $content .= "\n";
         $content .= $row->greet . "\n";
-        $content .= "Copy Paste link url ini untuk aktifasi " . site_url() . "rahasia/aktifasi/" . $uid . "\n";
+        $content .= "Copy Paste link url ini untuk aktifasi " . site_url() . "/rahasia/aktifasi/" . $uid . "\n";
 
         $paramConfig = array(
             'to' => $to,
