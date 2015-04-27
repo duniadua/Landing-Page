@@ -5,28 +5,34 @@
  * Untuk di distribusikan ke domain2 anak
  * @author sahid
  */
+use Monolog\Logger;
+use Monolog\Handler\BrowserConsoleHandler;
+
 class rahasia extends CI_Controller {
 
     private $urlReturn = "";
     private $urlReplika = "home_replika";
     private $urlAktifasi = "aktifasi";
     private $urlConfig = "html_config_async";
-    private $urlRpcs = 'http://www.k-link.co.id/index.php/remote_rpcs';
-//    private $urlRpcs = 'http://localhost/newklink/index.php/remote_rpcs';
+//    private $urlRpcs = 'http://www.k-link.co.id/index.php/remote_rpcs';
+    private $urlRpcs = 'http://localhost/newklink/index.php/remote_rpcs';
+    private $xmLogger;
 
     public function __construct() {
         parent::__construct();
         $this->urlReturn = get_class($this);
-        $this->load->library('email');
-        $this->load->library('xmlrpc');
-        $this->load->library('xmlrpcs');
         $this->load->model('landing_model', 'landing');
         $this->load->model('param_model', 'param');
         $this->load->model('mailist_model', 'mail');
         $this->load->model('affiliate_model', 'affiliate');
+        $this->xmLogger = new Logger('xmlRPC');
+        $this->xmLogger->pushHandler(new BrowserConsoleHandler(Logger::DEBUG));
     }
 
     public function index() {
+
+        $this->xmLogger->addInfo('Called ' . $this->urlRpcs);
+
         $paramD = array(
             'limit' => 1
         );
@@ -68,7 +74,7 @@ class rahasia extends CI_Controller {
             'smtp_pwd' => $row->smtp_pwd,
             'smtp_port' => $row->smtp_port,
         );
-//      Menghitung jumlah view
+
         $this->countLanding();
 
         $this->form_validation->set_rules('nama', 'Nama', 'required');
@@ -204,7 +210,7 @@ class rahasia extends CI_Controller {
         endif;
 
         $config = array(
-            'protocol' => 'smtp',            
+            'protocol' => 'smtp',
             'charset' => 'utf-8',
             'priority' => 3,
             'smtp_host' => $smtp_host,
@@ -305,7 +311,11 @@ class rahasia extends CI_Controller {
         $this->xmlrpc->request($request);
 
         if (!$this->xmlrpc->send_request()) {
+            $this->xmLogger->addWarning('No Response from remote server');
             echo $this->xmlrpc->display_error();
+        } else {
+            $result = $this->xmlrpc->display_response();
+            $this->xmLogger->addInfo($result['respond']);
         }
     }
 
@@ -321,7 +331,11 @@ class rahasia extends CI_Controller {
         $this->xmlrpc->request($request);
 
         if (!$this->xmlrpc->send_request()) {
+            $this->xmLogger->addWarning('No Response from remote server');
             echo $this->xmlrpc->display_error();
+        } else {
+            $result = $this->xmlrpc->display_response();
+            $this->xmLogger->addInfo($result['respond']);
         }
     }
 

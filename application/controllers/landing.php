@@ -12,6 +12,7 @@ class landing extends CI_Controller {
     private $urlSetup = "setup";
     private $urlConfig = "html_config_landing";
     private $urlFooter = "footer";
+    private $logout = 'contributor/login';
 
     public function __construct() {
         parent::__construct();
@@ -47,7 +48,7 @@ class landing extends CI_Controller {
                 $this->load->view($this->urlReturn, $data);
                 $this->load->view($this->urlFooter);
             else:
-                redirect('access/login');
+                redirect($this->logout);
             endif;
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
@@ -77,7 +78,7 @@ class landing extends CI_Controller {
             $this->load->view(__FUNCTION__, $data);
             $this->load->view($this->urlFooter);
         else:
-            redirect('access/login');
+            redirect($this->logout);
         endif;
     }
 
@@ -95,7 +96,7 @@ class landing extends CI_Controller {
             $this->load->view($this->urlList, $data);
             $this->load->view($this->urlFooter);
         else:
-            redirect('access/login');
+            redirect($this->logout);
         endif;
     }
 
@@ -117,7 +118,7 @@ class landing extends CI_Controller {
             $this->load->view($this->urlSetup, $data);
             $this->load->view($this->urlFooter);
         else:
-            redirect('access/login');
+            redirect($this->logout);
         endif;
     }
 
@@ -137,7 +138,7 @@ class landing extends CI_Controller {
             $this->load->view(__FUNCTION__, $data);
             $this->load->view($this->urlFooter);
         else:
-            redirect('access/login');
+            redirect($this->logout);
         endif;
     }
 
@@ -176,7 +177,7 @@ class landing extends CI_Controller {
             $this->load->view(__FUNCTION__, $data);
             $this->load->view($this->urlFooter);
         else:
-            redirect('access/login');
+            redirect($this->logout);
         endif;
     }
 
