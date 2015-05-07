@@ -105,7 +105,7 @@
                     'replyto' => $rowParam->email,
                 );
 
-                echo form_open('rahasia', '', $hiddenField);
+                echo form_open('home', '', $hiddenField);
                 ?>
                 <div class="row">
                     <div class="6u 12u(mobilep)">

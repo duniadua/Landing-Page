@@ -1,50 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html>
     <head>
         <?php
         if (count($domainparam) > 0):
             $rowParam = $domainparam;
         endif;       
         ?>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title><?php if (isset($rowParam->name)) echo $rowParam->name; ?></title>
-        <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
-        <!-- Bootstrap -->
-        <link href="<?php echo base_url(); ?>css/bootstrap2.min.css" rel="stylesheet">
-        <link href="<?php echo base_url(); ?>css/rahasia-style.css" rel="stylesheet">
-        <link href="<?php echo base_url(); ?>font-awesome-4.2.0/css/font-awesome.css" rel="stylesheet">
+        <title>Terima Kasih</title>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta name="description" content="Dapatkan Ebok Gratis dengan mengisi nama anda" />
+        <meta name="keywords" content="kesehatan,survey,hadiah,gratis,ebook,tips,artikel,bau mulut,atasi bau mulut," />
+        <!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
+        <script src="<?php echo base_url(); ?>js/jquery.min.js"></script>
+        <script src="<?php echo base_url(); ?>js/skel.min.js"></script>
+        <script src="<?php echo base_url(); ?>js/init.js"></script>
 
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-          <![endif]-->
+        <link rel="stylesheet" href="<?php echo base_url(); ?>css/skel.css" />
+        <link rel="stylesheet" href="<?php echo base_url(); ?>css/style.css" />
+        <link rel="stylesheet" href="<?php echo base_url(); ?>css/style-wide.css" />
+        <!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
     </head>
     <body>
-        <div class="container">
-            <header>
-                <nav class="container">
-                    <a href="/" class="surreal-logo surreal-logo-dark"><?php if (isset($rowParam->owner)) echo $rowParam->owner; ?></a>
-                    <a href="#" class="mobile-menu-toggle"><i class="fa fa-bars"></i></a>        
-                </nav>
-            </header>
-            <section class="teaser">                                        
-            </section>
-        </div>    
-        <div class="container">
-            <section class="marketing-author bg-pale">
-                <div class="col-xs-12 col-md-12">                      
-                    <h3 class="text-center">Terima Kasih Anda Telah <?php echo $pesan?></h3>                    
-                </div>
-            </section>  
-        </div>             
-        <footer>
-            <p class="text-center">Rahasia Sukses.com - 2014</p>      
-        </footer>        
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>        
-        <script src="<?php echo base_url(); ?>js/bootstrap.min.js"></script>        
+
+        <!-- Header -->
+        <div id="header">
+            <span class="logo icon fa fa-thumbs-up"></span>
+            <h1>Terima Kasih</h1>
+            <p>
+                Anda Telah Mengaktifasikan Alamat Email Anda
+                <br />
+            </p>
+            <br><br>
+            <div class="container 75%">
+                <ul class="icons">
+                    <li><a href="<?php if (isset($rowParam->twitter)) echo site_url($rowParam->twitter); ?>" class="icon fa-twitter"><span class="label">Twitter</span></a > <?php if (isset($rowParam->twitter)) echo $rowParam->twitter; ?></li>
+                    <li><a href="<?php if (isset($rowParam->fb)) echo site_url($rowParam->fb); ?>" class="icon fa-facebook"><span class="label">Facebook</span></a> <?php if (isset($rowParam->fb)) echo $rowParam->fb; ?></li>
+                    <li><a href="#" class="icon fa-envelope-o"><span class="label">E-mail</span></a> <?php if (isset($rowParam->email)) echo $rowParam->email; ?></li>
+                    <li><a href="#" class="icon fa-phone"><span class="label">Github</span></a> <?php if (isset($rowParam->phone)) echo $rowParam->phone; ?></li>
+                    <li><a href="#" class="icon fa-whatsapp"><span class="label">Dribbble</span></a> <?php if (isset($rowParam->phone)) echo $rowParam->phone; ?></li>
+                </ul>
+
+                <ul class="copyright">
+                    <li>&copy; All rights reserved - @2015 </li>
+                </ul>
+            </div>
+        </div>
     </body>
+</html>
+</body>
 </html>

@@ -8,7 +8,7 @@
 use Monolog\Logger;
 use Monolog\Handler\BrowserConsoleHandler;
 
-class rahasia extends CI_Controller {
+class home extends CI_Controller {
 
     private $urlReturn = "";
     private $urlReplika = "home_replika";
@@ -61,7 +61,7 @@ class rahasia extends CI_Controller {
         $content = "Hallo perkenalkan saya " . $row->owner . "\n";
         $content .= "\n";
         $content .= $row->greet . "\n";
-        $content .= "Copy Paste link url ini untuk aktifasi " . site_url() . "/rahasia/aktifasi/" . $uid . "\n";
+        $content .= "Copy Paste link url ini untuk aktifasi " . site_url() . "/home/aktifasi/" . $uid . "\n";
 
         $paramConfig = array(
             'to' => $to,
@@ -86,7 +86,7 @@ class rahasia extends CI_Controller {
                 $this->sendMailConfig($paramConfig);
                 $this->mail->insert();
                 $this->insertMailist();
-                redirect('rahasia/thank_you');
+                redirect('home/thank_you');
             endif;
         endif;
 
@@ -130,7 +130,7 @@ class rahasia extends CI_Controller {
             $this->session->set_userdata($dataSession);
         endif;
 
-        redirect('rahasia');
+        redirect('home');
     }
 
     public function thank_you() {
