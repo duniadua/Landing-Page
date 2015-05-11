@@ -44,36 +44,41 @@ class user_model extends CI_Model {
             $sql .= " ORDER BY " . $param["order"];
         if (isset($param["limit"]))
             $sql .= " LIMIT " . $param["limit"];
-
+        
         return $this->db->query($sql)->row();
-    }   
-    
+    }
+
     public function insert() {
+        $salt = mt_rand(10, 100);
         $data = array();
-        $post = $this->input->post();
+        $post = $this->input->post(NULL, TRUE);
         $fields = $this->db->list_fields(self::$table);
 
-        foreach ($fields as $myfield):                    
-            if(isset($post[$myfield])):
+        foreach ($fields as $myfield):
+            if (isset($post[$myfield])):
                 $data[$myfield] = $post[$myfield];
-            endif;        
-                                
+            endif;
+
             if ($myfield == 'last_ip'):
                 $data[$myfield] = $this->input->ip_address();
             endif;
-            
+
+            if ($myfield == 'password'):
+                $data[$myfield] = crypt($this->input->post('password'), $salt);
+            endif;
+
             if ($myfield == 'privileges'):
                 $data[$myfield] = 4;
             endif;
-            
+
             if ($myfield == 'createdt'):
                 $data[$myfield] = date('Y-m-d H:i:s');
             endif;
-            
+
             if ($myfield == 'last_login'):
                 $data[$myfield] = date('Y-m-d H:i:s');
             endif;
-            
+
             if ($myfield == 'usertype'):
                 $data[$myfield] = 4;
             endif;
@@ -87,15 +92,15 @@ class user_model extends CI_Model {
         $post = $this->input->post();
         $fields = $this->db->list_fields(self::$table);
 
-        foreach ($fields as $myfield):                    
-            if(isset($post[$myfield])):
+        foreach ($fields as $myfield):
+            if (isset($post[$myfield])):
                 $data[$myfield] = $post[$myfield];
-            endif;        
-                                
+            endif;
+
             if ($myfield == 'ip_address'):
                 $data[$myfield] = $this->input->ip_address();
             endif;
-            
+
             if ($myfield == 'createdt'):
                 $data[$myfield] = date('Y-m-d H:i:s');
             endif;

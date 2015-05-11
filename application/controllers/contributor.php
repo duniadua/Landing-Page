@@ -77,17 +77,17 @@ class contributor extends CI_Controller {
                     . " Periksa lagi Username dan Password, Besar kecil Berpengaruh"
                     . "</div>";
 
-            $user = $this->input->post('username');
-            $password = $this->input->post('password');
+            $user = filter_var($this->input->post('username', TRUE), FILTER_SANITIZE_STRING);
+            $password = $this->input->post('password',TRUE);
+            
 
             $param = array(
-                'where' => "username ='" . $user . "'",
-                'and' => "password = '" . $password . "'",
+                'where' => "username ='" . $user . "'",                
             );
 
             $d = $this->user->get($param);
 
-            if (count($d) > 0):
+            if (crypt($password, $d->password) == $d->password):
                 $newdata = array('username' => $user,
                     'login' => TRUE,
                 );
