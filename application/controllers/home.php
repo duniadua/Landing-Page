@@ -13,6 +13,7 @@ class home extends CI_Controller {
     private $urlReturn = "";
     private $urlReplika = "home_replika";
     private $urlAktifasi = "aktifasi";
+    private $urlNonAktif = "nonaktif";
     private $urlConfig = "html_config_async";
 //    private $urlRpcs = 'http://www.k-link.co.id/index.php/remote_rpcs';
     private $urlRpcs = 'http://localhost/newklink/index.php/remote_rpcs';
@@ -287,11 +288,10 @@ class home extends CI_Controller {
             'limit' => 1
         );
 
-        $data['domainparam'] = $this->param->get($param);
-        $data['pesan'] = "Anda Telah Berhenti Berlangganan dari Mailist Kami";
+        $data['domainparam'] = $this->param->get($param);        
 
         $this->mail->deactivate($uid);
-        $this->load->view($this->urlAktifasi, $data);
+        $this->load->view($this->urlNonAktif);
     }
 
     private function insertMailist() {
