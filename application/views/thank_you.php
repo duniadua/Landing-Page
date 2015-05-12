@@ -16,7 +16,7 @@
         <meta name="description" content="Dapatkan Ebok Gratis dengan mengisi nama anda" />
         <meta name="keywords" content="kesehatan,survey,hadiah,gratis,ebook,tips,artikel,bau mulut,atasi bau mulut," />
         <!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
-        <script src="<?php echo base_url(); ?>js/jquery.min.js"></script>
+        <script src="<?php echo base_url(); ?>js/jquery-1.11.3.min.js"></script>
         <script src="<?php echo base_url(); ?>js/skel.min.js"></script>
         <script src="<?php echo base_url(); ?>js/init.js"></script>
 

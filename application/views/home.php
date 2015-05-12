@@ -21,7 +21,7 @@
         <meta name="description" content="Dapatkan Ebok Gratis dengan mengisi nama anda" />
         <meta name="keywords" content="kesehatan,survey,hadiah,gratis,ebook,tips,artikel,bau mulut,atasi bau mulut," />
         <!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
-        <script src="<?php echo base_url(); ?>js/jquery.min.js"></script>
+        <script src="<?php echo base_url(); ?>js/jquery-1.11.3.min.js"></script>
         <script src="<?php echo base_url(); ?>js/skel.min.js"></script>
         <script src="<?php echo base_url(); ?>js/init.js"></script>
 
@@ -126,8 +126,8 @@
                 <?php echo validation_errors(); ?>
 
                 <ul class="icons">
-                    <li><a href="<?php if (isset($rowParam->twitter)) echo site_url($rowParam->twitter); ?>" class="icon fa-twitter"><span class="label">Twitter</span></a > <?php if (isset($rowParam->twitter)) echo $rowParam->twitter; ?></li>
-                    <li><a href="<?php if (isset($rowParam->fb)) echo site_url($rowParam->fb); ?>" class="icon fa-facebook"><span class="label">Facebook</span></a> <?php if (isset($rowParam->fb)) echo $rowParam->fb; ?></li>
+                    <li><a href="<?php if (isset($rowParam->twitter)) echo $rowParam->twitter; ?>" class="icon fa-twitter"><span class="label">Twitter</span></a > <?php if (isset($rowParam->twitter)) echo $rowParam->twitter; ?></li>
+                    <li><a href="<?php if (isset($rowParam->fb)) echo $rowParam->fb; ?>" class="icon fa-facebook"><span class="label">Facebook</span></a> <?php if (isset($rowParam->fb)) echo $rowParam->fb; ?></li>
                     <li><a href="#" class="icon fa-envelope-o"><span class="label">E-mail</span></a> <?php if (isset($rowParam->email)) echo $rowParam->email; ?></li>
                     <li><a href="#" class="icon fa-phone"><span class="label">Github</span></a> <?php if (isset($rowParam->phone)) echo $rowParam->phone; ?></li>
                     <li><a href="#" class="icon fa-whatsapp"><span class="label">Dribbble</span></a> <?php if (isset($rowParam->phone)) echo $rowParam->phone; ?></li>

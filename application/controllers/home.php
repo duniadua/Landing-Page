@@ -38,7 +38,14 @@ class home extends CI_Controller {
             'limit' => 1
         );
 
-        $data['domainparam'] = $this->param->get($paramD);
+        $affiliateSession = $this->getAffiliasiSession();
+
+        if (!empty($affiliateSession)):
+            $data['domainparam'] = (object) $affiliateSession;
+            $owner = $this->session->userdata('nama');
+        else:
+            $data['domainparam'] = $this->param->get($paramD);
+        endif;
 
         $landing = array(
             'where' => 'ld_act = 1',
@@ -54,15 +61,17 @@ class home extends CI_Controller {
         $to = $this->input->post('email');
         $uid = $this->input->post('uid');
 
-//        Content email untuk dirubah ada disini
-//        TODO jika id di set maka row owner akan menjadi value dan default value 
-//        akan hilang
-
-        $subject = "Confirm Mailist Registration";
-        $content = "Hallo perkenalkan saya " . $row->owner . "\n";
+        if (!empty($owner)):
+            $owner = $owner;
+        else:
+            $owner = $row->owner;
+        endif;
+        
+        $subject = "Confirm Registration";
+        $content = "Hallo perkenalkan saya " . $owner . "\n";
         $content .= "\n";
         $content .= $row->greet . "\n";
-        $content .= "Copy Paste link url ini untuk aktifasi " . site_url() . "/home/aktifasi/" . $uid . "\n";
+        $content .= "Klik atau Copy Paste link ini untuk aktifasi " . site_url() . "/home/aktifasi/" . $uid . "\n";
 
         $paramConfig = array(
             'to' => $to,
@@ -109,6 +118,19 @@ class home extends CI_Controller {
         endif;
     }
 
+    /*
+     * Mengambil data session yang berasal dari afiliasi
+     * Jika terdapat session item nama maka fungsi ini akan mengembalikan nilai 
+     */
+
+    private function getAffiliasiSession() {
+        $sesVal = $this->session->userdata('nama');
+
+        if (!empty($sesVal)):
+            return $this->session->all_userdata();
+        endif;
+    }
+
     public function affiliasi($id = null) {
         if (!empty($id)):
             $para = array(
@@ -116,22 +138,29 @@ class home extends CI_Controller {
             );
 
             $fetchSession = $this->affiliate->get($para);
-            $rows = $fetchSession;
 
-            $dataSession = array(
-                'dfno' => $rows->dfno,
-                'nama' => $rows->nama,
-                'email' => $rows->email,
-                'pinbb' => $rows->pinbb,
-                'phone' => $rows->phone,
-                'fb' => $rows->fb,
-                'twitter' => $rows->twitter,
-            );
+            if (!empty($fetchSession)):
+                $rows = $fetchSession;
 
-            $this->session->set_userdata($dataSession);
+                $dataSession = array(
+                    'dfno' => $rows->dfno,
+                    'nama' => $rows->nama,
+                    'email' => $rows->email,
+                    'replyto' => $rows->email,
+                    'pinbb' => $rows->pinbb,
+                    'phone' => $rows->phone,
+                    'fb' => $rows->fb,
+                    'twitter' => $rows->twitter,
+                );
+
+                $this->session->set_userdata($dataSession);
+
+                redirect('home');
+            else:
+                show_404();
+            endif;
+
         endif;
-
-        redirect('home');
     }
 
     public function thank_you() {
@@ -288,7 +317,7 @@ class home extends CI_Controller {
             'limit' => 1
         );
 
-        $data['domainparam'] = $this->param->get($param);        
+        $data['domainparam'] = $this->param->get($param);
 
         $this->mail->deactivate($uid);
         $this->load->view($this->urlNonAktif);
