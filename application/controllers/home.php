@@ -66,7 +66,7 @@ class home extends CI_Controller {
         else:
             $owner = $row->owner;
         endif;
-        
+
         $subject = "Confirm Registration";
         $content = "Hallo perkenalkan saya " . $owner . "\n";
         $content .= "\n";
@@ -93,10 +93,14 @@ class home extends CI_Controller {
 
         if ($this->input->post('submit')):
             if ($this->form_validation->run()):
-                $this->sendMailConfig($paramConfig);
-                $this->mail->insert();
-                $this->insertMailist();
-                redirect('home/thank_you');
+                if ($this->cekServiceAuth() == TRUE):
+                    $this->sendMailConfig($paramConfig);
+                    $this->mail->insert();
+                    $this->insertMailist();
+                    redirect('home/thank_you');
+                else:                    
+                    show_error(AUTH_INFO);
+                endif;
             endif;
         endif;
 
@@ -168,7 +172,14 @@ class home extends CI_Controller {
             'limit' => 1
         );
 
-        $data['domainparam'] = $this->param->get($paramD);
+        $affiliateSession = $this->getAffiliasiSession();
+
+        if (!empty($affiliateSession)):
+            $data['domainparam'] = (object) $affiliateSession;
+            $owner = $this->session->userdata('nama');
+        else:
+            $data['domainparam'] = $this->param->get($paramD);
+        endif;
 
         $this->load->view(__FUNCTION__, $data);
     }
@@ -365,6 +376,30 @@ class home extends CI_Controller {
         } else {
             $result = $this->xmlrpc->display_response();
             $this->xmLogger->addInfo($result['respond']);
+        }
+    }
+
+//    fungsi cekServiceAuth untuk mengecek validitas domain
+    private function cekServiceAuth() {
+        $authKey = $this->param->get(['limit' => 1]);
+
+        $this->xmlrpc->set_debug(FALSE);
+        $this->xmlrpc->server($this->urlRpcs, 80);
+        $this->xmlrpc->method('authService');
+
+        $request = array(array(array(
+                    'privatekey' => array($authKey->privatekey, 'string')),
+                'struct'));
+
+        $this->xmlrpc->request($request);
+
+        if (!$this->xmlrpc->send_request()) {
+            $this->xmLogger->addWarning('No Response from remote server');
+            $this->xmLogger->addInfo($this->xmlrpc->display_error());
+        } else {
+            $result = $this->xmlrpc->display_response();
+            $this->xmLogger->addInfo($result['respond']);
+            return $result['respond'];
         }
     }
 

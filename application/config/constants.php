@@ -43,5 +43,10 @@ define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 /*   
  * 
  *  */
+$info_mssg="Aplikasi Anda belum terdaftar di database K-Link Hubungi Digital "
+        . "Department 021-29027000";
+
 define('PAGING_ROW',20);
 define('ARTICLE_ROW',5);
+define('URL_RPCS','');
+define('AUTH_INFO',$info_mssg);
