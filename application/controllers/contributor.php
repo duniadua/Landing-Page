@@ -55,7 +55,7 @@ class contributor extends CI_Controller {
             $data['typeBank'] = $this->landingtype->gets();
             $data['menus'] = $this->menu->gets();
 
-            if ($this->input->post('submit')):
+            if ($this->input->post('submit')):                
                 $this->user->insert();
             endif;
 
