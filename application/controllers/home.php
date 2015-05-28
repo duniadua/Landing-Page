@@ -184,34 +184,6 @@ class home extends CI_Controller {
         $this->load->view(__FUNCTION__, $data);
     }
 
-    public function about_us() {
-
-        $sessionNama = $this->session->userdata('nama');
-
-        if (empty($sessionNama)):
-            $paramD = array(
-                'limit' => 1
-            );
-
-            $data['domainparam'] = $this->param->get($paramD);
-
-        else:
-            $dataSes = (object) array(
-                        'dfno' => $this->session->userdata('dfno'),
-                        'nama' => $this->session->userdata('nama'),
-                        'pinbb' => $this->session->userdata('pinbb'),
-                        'fb' => $this->session->userdata('fb'),
-                        'twitter' => $this->session->userdata('twitter'),
-                        'email' => $this->session->userdata('email'),
-                        'phone' => $this->session->userdata('phone'),
-            );
-
-            $data['domainparam'] = $dataSes;
-        endif;
-
-        $this->load->view(__FUNCTION__, $data);
-    }
-
     private function sendMailConfig($param = array()) {
 
         if (isset($param['to'])):

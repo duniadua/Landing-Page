@@ -24,12 +24,12 @@ class affiliate_model extends CI_Model {
         if (isset($param["and"]))
             $sql .= " AND " . $param["and"];
         if (isset($param["order"]))
-            $sql .= " ORDER BY " . $param["order"];        
+            $sql .= " ORDER BY " . $param["order"];
         if (isset($param["limit"]))
             $sql .= " LIMIT " . $param["limit"];
         if (isset($param["offset"]))
             $sql .= " OFFSET " . $param["offset"];
-        
+
         return $this->db->query($sql)->result();
     }
 
@@ -69,7 +69,7 @@ class affiliate_model extends CI_Model {
             if ($myfield == 'act'):
                 $data[$myfield] = 1;
             endif;
-                        
+
             if ($myfield == 'createnm'):
                 $data[$myfield] = $this->session->userdata('username');
             endif;
@@ -80,6 +80,10 @@ class affiliate_model extends CI_Model {
 
         endforeach;
 
+        $this->db->insert(self::$table, $data);
+    }
+
+    public function insertRemote($data) {
         $this->db->insert(self::$table, $data);
     }
 
@@ -110,4 +114,5 @@ class affiliate_model extends CI_Model {
         $this->db->where('id', $id);
         $this->db->delete(self::$table);
     }
+
 }

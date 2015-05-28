@@ -27,13 +27,13 @@
 
             $.ajax({
                 dataType: 'json',
-                url: "<?php echo site_url()?>/afiliasi/getMember/" + memberid,
+                url: "<?php echo site_url() ?>/afiliasi/getMember/" + memberid,
                 type: 'GET',
                 success:
                         function(data) {
                             if (data.response == 'true')
                             {
-                                $("#fullnm").val(data.fullnm);                                
+                                $("#fullnm").val(data.fullnm);
                             }
                             if (data.response == 'false')
                             {
@@ -51,7 +51,6 @@
 
 
 </script>
-
 </body>
 </html>
 
