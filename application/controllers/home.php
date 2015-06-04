@@ -98,7 +98,7 @@ class home extends CI_Controller {
                     $this->mail->insert();
                     $this->insertMailist();
                     redirect('home/thank_you');
-                else:                    
+                else:
                     show_error(AUTH_INFO);
                 endif;
             endif;
@@ -135,6 +135,10 @@ class home extends CI_Controller {
         endif;
     }
 
+    /* Name : Affiliasi 
+     * Fungsi affiliasi untuk menyimpan session dan mengarahkan ke halaman home
+     */
+
     public function affiliasi($id = null) {
         if (!empty($id)):
             $para = array(
@@ -153,6 +157,7 @@ class home extends CI_Controller {
                     'replyto' => $rows->email,
                     'pinbb' => $rows->pinbb,
                     'phone' => $rows->phone,
+                    'style' => $rows->style,
                     'fb' => $rows->fb,
                     'twitter' => $rows->twitter,
                 );
@@ -183,6 +188,10 @@ class home extends CI_Controller {
 
         $this->load->view(__FUNCTION__, $data);
     }
+
+    /* Name : Send Mail Config 
+     * Fungsi sebagai konfigurasi untuk pengiriman mengunakan CI native class
+     */
 
     private function sendMailConfig($param = array()) {
 
@@ -243,7 +252,7 @@ class home extends CI_Controller {
         $this->email->message($content);
         $this->email->send();
 
-//        echo $this->email->print_debugger();
+        //echo $this->email->print_debugger();
     }
 
     public function aktifasi($uid) {
@@ -292,7 +301,7 @@ class home extends CI_Controller {
         $this->mail->activate($uid);
         $this->setActive($uid);
         $this->load->view($this->urlAktifasi, $data);
-//        echo $this->email->print_debugger();
+        //echo $this->email->print_debugger();
     }
 
     public function nonaktif($uid) {
@@ -313,6 +322,7 @@ class home extends CI_Controller {
 
         $request = array(array(array(
                     'uid' => array($this->input->post('uid'), 'string'),
+                    'dfno' => array($this->input->post('dfno'), 'string'),
                     'name' => array($this->input->post('nama'), 'string'),
                     'email' => array($this->input->post('email'), 'string'),
                     'replyto' => array($this->input->post('replyto'), 'string'),
@@ -351,7 +361,10 @@ class home extends CI_Controller {
         }
     }
 
-//    fungsi cekServiceAuth untuk mengecek validitas domain
+    /* Name Cek Service Auth
+     * fungsi cekServiceAuth untuk mengecek validitas domain
+     */
+
     private function cekServiceAuth() {
         $authKey = $this->param->get(['limit' => 1]);
 

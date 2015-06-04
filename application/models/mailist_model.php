@@ -60,7 +60,8 @@ class mailist_model extends CI_Model {
     public function insert() {
         $data = array(
             'uid' => $this->input->post('uid'),
-            'name' => $this->input->post('nama'),
+            'dfno' => $this->input->post('dfno'),
+            'name' => $this->input->post('nama'),            
             'email' => $this->input->post('email'),
             'replyto' => $this->input->post('replyto'),
             'ld_type' => $this->input->post('ld_type'),

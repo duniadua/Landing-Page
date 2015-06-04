@@ -28,6 +28,13 @@
         <link rel="stylesheet" href="<?php echo base_url(); ?>css/skel.css" />
         <link rel="stylesheet" href="<?php echo base_url(); ?>css/style.css" />
         <link rel="stylesheet" href="<?php echo base_url(); ?>css/style-wide.css" />
+        
+        <?php         
+        
+         if(isset($rowParam->style)):
+             echo $rowParam->style;
+         endif;
+        ?>
 
         <!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
     </head>
@@ -103,6 +110,7 @@
                     'ld_type' => $row->ld_type,
                     'uid' => random_string('alnum', 10),
                     'replyto' => $rowParam->email,
+                    'dfno' => $rowParam->dfno,
                 );
 
                 echo form_open('home', '', $hiddenField);
