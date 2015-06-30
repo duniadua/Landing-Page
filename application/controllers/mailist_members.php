@@ -20,6 +20,7 @@ class mailist_members extends CI_Controller {
     private $urlFooter = "footer";
     private $urlRpcs = 'http://www.k-link.co.id/index.php/remote_rpcs/';
 
+
     public function __construct() {
         parent::__construct();
         $this->urlReturn = get_class($this);
@@ -56,7 +57,7 @@ class mailist_members extends CI_Controller {
      * return string
      * * */
     public function approve($uid) {
-        $this->xmlrpc->set_debug(FALSE);
+        $this->xmlrpc->set_debug(false);
         $this->xmlrpc->server($this->urlRpcs, 80);
         $this->xmlrpc->method('activateRegMailist');
 
