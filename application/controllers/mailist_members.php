@@ -36,6 +36,7 @@ class mailist_members extends CI_Controller {
         if ($valid == TRUE):
             $mailist = array(
                 'where' => 'act = 1',
+                'and' => 'registered = 0',
                 'order' => 'id DESC',
             );
 
@@ -55,7 +56,7 @@ class mailist_members extends CI_Controller {
      * return string
      * * */
     public function approve($uid) {
-        $this->xmlrpc->set_debug(false);
+        $this->xmlrpc->set_debug(FALSE);
         $this->xmlrpc->server($this->urlRpcs, 80);
         $this->xmlrpc->method('activateRegMailist');
 
@@ -69,8 +70,10 @@ class mailist_members extends CI_Controller {
             echo $this->xmlrpc->display_error();
         } else {
             $response = $this->xmlrpc->display_response();
-//            $response['respond'];
-//            $response['message'];
+            if ($response['respond'] == "1110"):
+                $this->mailist->updateFlagRegisteredMember($uid);
+                echo $response['message'];
+            endif;
         }
     }
 

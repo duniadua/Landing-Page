@@ -152,5 +152,19 @@ class mailist_model extends CI_Model {
         $this->db->where('id', $id);
         $this->db->update(self::$table, $data);
     }
+    
+    /**
+     * Untuk merubah flag member yg telah memiliki id k-link
+     * Khusus Client Side
+     * 
+     * **/
+    public function updateFlagRegisteredMember($uid) {
+        $data = array(
+            'registered' => 1,
+        );
+
+        $this->db->where('uid', $uid);
+        $this->db->update(self::$table, $data);
+    }
 
 }

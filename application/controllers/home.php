@@ -16,7 +16,7 @@ class home extends CI_Controller {
     private $urlNonAktif = "nonaktif";
     private $urlConfig = "html_config_async";
 //    private $urlRpcs = 'http://www.k-link.co.id/index.php/remote_rpcs';
-    private $urlRpcs = 'http://localhost/newklink/index.php/remote_rpcs';
+    private $urlRpcs = 'http://localhost/klink.co.id/index.php/remote_rpcs';
     private $xmLogger;
 
     public function __construct() {

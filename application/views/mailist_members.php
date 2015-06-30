@@ -86,7 +86,7 @@
                                         <td><?php echo $no ?></td>
                                         <td><?php echo $rowAdd->name ?></td>
                                         <td><?php echo $rowAdd->email ?></td>
-                                        <td><?php echo date('D-m-Y H:i:s', strtotime($rowAdd->subscribedt)) ?></td>
+                                        <td><?php echo date('d-m-Y H:i:s', strtotime($rowAdd->subscribedt)) ?></td>
                                         <?php
                                         if ($rowAdd->act == 0):
                                             $status = "New";
